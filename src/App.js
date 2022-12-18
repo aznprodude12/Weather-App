@@ -1,4 +1,5 @@
 import './App.css';
+import { useState, useEffect } from 'react'
 import UilReact from '@iconscout/react-unicons/icons/uil-react'
 import TopButtons from './components/TopButtons'
 import Inputs from './components/Inputs'
@@ -10,12 +11,19 @@ import getFormattedWeatherData from './services/weatherService'
 
 function App() {
 
-     const fetchWeather = async() => {
-          const data = await getFormattedWeatherData({ q: 'fargo' })
-          console.log(data)
-     }
+     const [ query, setQuery ] = useState({ q: 'berlin' })
+     const [ units, setUnits ] = useState('metric')
+     const [ weather, setWeather ] = useState(null)
 
-     fetchWeather()
+     useEffect(() => {
+          const fetchWeather = async() => {
+               await getFormattedWeatherData({ ...query, units}).then(data => {
+                    setWeather(data)
+               })
+          }
+
+          fetchWeather()
+     }, [query, units])
 
      return (
           <div className="App">
@@ -23,10 +31,16 @@ function App() {
                    <TopButtons />
                    <Inputs />
 
-                   <TimeAndLocation />
-                   <TemperatureAndDetails />
-                   <Forecast title="hourly forecast" />
-                   <Forecast title="daily forecast" />
+                   {
+                        weather && (
+                             <div>
+                                  <TimeAndLocation weather={weather}/>
+                                  <TemperatureAndDetails weather={weather}/>
+                                  <Forecast title="hourly forecast" />
+                                  <Forecast title="daily forecast" />
+                             </div>
+                        )
+                   }
               </div>
           </div>
      );
