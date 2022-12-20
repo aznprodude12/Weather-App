@@ -2,6 +2,8 @@
 
 This project was built to fetch and display the weather data for a city. You can search for a city, select a predefined city, or share your current geolocation giving permission from your browser.
 
+Check out the demo here: https://hoaho-weather-app.netlify.app/
+
 This weather app will display the following:
 - Location date
 - Location time
