@@ -15,7 +15,7 @@ import getFormattedWeatherData from './services/weatherService'
 function App() {
 
      const [ query, setQuery ] = useState({ q: 'fargo' })
-     const [ units, setUnits ] = useState('metric')
+     const [ units, setUnits ] = useState('imperial')
      const [ weather, setWeather ] = useState(null)
 
      useEffect(() => {
