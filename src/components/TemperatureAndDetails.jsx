@@ -14,7 +14,19 @@ import { formatToLocalTime, iconUrlFromCode } from "../services/weatherService"
 function TemperatureAndDetails({ weather: {
      details, icon, temp, temp_min, temp_max, sunrise, sunset, speed, humidity,
      feels_like, timezone
-}}) {
+}, units }) {
+
+     switch(units) {
+          case 'metric':
+               units = "C"
+               break
+          case 'imperial':
+               units = "F"
+               break
+          default:
+               units = ""
+     }
+
      return (
           <div>
                <div className="flex items-center justify-center py-6 text-xl text-cyan-300">
@@ -27,12 +39,12 @@ function TemperatureAndDetails({ weather: {
                          alt=""
                          className="w-20"
                     />
-                    <p className="text-5xl">{`${temp.toFixed()}°`}</p>
+                    <p className="text-5xl">{`${temp.toFixed()} °${units}`}</p>
                     <div className="flex flex-col space-y-2">
                          <div className="flex font-light text-sm items-center justify-center">
                               <UilTemperature size={18} className="mr-1"/>
                               Real feel:
-                              <span className="font-medium ml-1">{`${feels_like.toFixed()}°`}</span>
+                              <span className="font-medium ml-1">{`${feels_like.toFixed()} °${units}`}</span>
                          </div>
                          <div className="flex font-light text-sm items-center justify-center">
                               <UilTear size={18} className="mr-1"/>

@@ -20,6 +20,13 @@ function Inputs({ setQuery, units, setUnits }) {
           }
      }
 
+     const handleUnitsChange = (e) => {
+          const selectedUnit = e.currentTarget.name
+
+          if (units !== selectedUnit)
+               setUnits(selectedUnit)
+     }
+
      return (
           <div className="flex flex-row justify-center my-6">
                <div className="flex flex-row w-3/4 items-center justify-center space-x-4">
@@ -46,12 +53,18 @@ function Inputs({ setQuery, units, setUnits }) {
                     <button
                          name="metric"
                          className="text-xl text-white font-light transition ease-out hover:scale=125"
-                    >°C</button>
+                         onClick={handleUnitsChange}
+                    >
+                         °C
+                    </button>
                     <p className="text-xl text-white mx-1">|</p>
                     <button
                          name="imperial"
                          className="text-xl text-white font-light transition ease-out hover:scale=125"
-                    >°F</button>
+                         onClick={handleUnitsChange}
+                    >
+                         °F
+                    </button>
                </div>
           </div>
      )
